@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App</title>
+</head>
+<body>
+    <header>
+        <h1>Flask App</h1>
+        {% if session.get('logged_in') %}
+            <nav>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+        {% endif %}
+    </header>
+    <main>
+        {% if dashboard %}
+            <h2>Welcome to the Dashboard!</h2>
+            <p>This is a protected area.</p>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <h2>Login</h2>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <form method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+        {% endif %}
+    </main>
+</body>
+</html>
